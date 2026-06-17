@@ -2,7 +2,7 @@
    Chapter 22 — Enlightenment & Scientific Revolution (1550–1789)
    Teaching data: schedule, lessons, people, timeline, glossary, exams
    Source: HMH Social Studies World History (2018), Chapter 22
-   + 2nd Term 2026 List of Contents (NORDIC, 9th grade World History)
+   + 2nd Term 2026 List of Contents (Cohasset Language Center, 9th grade World History)
    ============================================================ */
 
 const STUDENT = "José Manuel";
