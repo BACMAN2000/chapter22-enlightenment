@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chapter 22 · Enlightenment & Scientific Revolution — Class App</title>
+<style>
+:root{
+  --bg:#0f1420; --bg2:#161d2e; --panel:#1c2740; --panel2:#222f4d;
+  --ink:#e9eef7; --muted:#9fb0cc; --line:#2c3a5c;
+  --gold:#e0b341; --gold2:#caa030; --blue:#5a8bff; --green:#3fbf7f; --red:#e0664f;
+  --shadow:0 10px 30px rgba(0,0,0,.35);
+}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%}
+body{
+  font-family:"Segoe UI",system-ui,Arial,sans-serif; color:var(--ink);
+  background:radial-gradient(1200px 700px at 80% -10%,#1b2a4a 0%,var(--bg) 55%);
+  display:flex; min-height:100vh;
+}
+a{color:var(--blue)}
+/* ---------- Sidebar ---------- */
+#side{
+  width:262px; flex-shrink:0; background:linear-gradient(180deg,#141b2c,#10151f);
+  border-right:1px solid var(--line); padding:18px 14px; position:sticky; top:0;
+  height:100vh; overflow-y:auto;
+}
+.brand{display:flex;gap:11px;align-items:center;margin-bottom:6px}
+.crest{width:42px;height:42px;border-radius:10px;background:linear-gradient(135deg,var(--gold),var(--gold2));
+  display:grid;place-items:center;font-weight:800;color:#241c00;font-size:19px;box-shadow:var(--shadow)}
+.brand h1{font-size:15px;margin:0;line-height:1.15}
+.brand small{color:var(--muted);font-size:11px}
+.navlbl{color:var(--muted);font-size:11px;text-transform:uppercase;letter-spacing:.10em;margin:16px 8px 6px}
+.nav{display:flex;flex-direction:column;gap:3px}
+.nav button{
+  text-align:left;background:transparent;border:0;color:var(--ink);padding:9px 12px;border-radius:9px;
+  cursor:pointer;font-size:14px;display:flex;gap:10px;align-items:center;transition:.12s;width:100%;
+}
+.nav button:hover{background:var(--panel)}
+.nav button.active{background:var(--panel2);box-shadow:inset 0 0 0 1px var(--line)}
+.nav .ico{width:20px;text-align:center;opacity:.9}
+.nav .pill{margin-left:auto;font-size:10px;background:var(--gold);color:#241c00;border-radius:20px;padding:1px 7px;font-weight:700}
+.studentbox{margin-top:18px;padding:11px;border:1px solid var(--line);border-radius:11px;background:var(--bg2)}
+.studentbox b{display:block;font-size:13px}
+.studentbox small{color:var(--muted);font-size:11px}
+/* ---------- Main ---------- */
+#main{flex:1;min-width:0;padding:26px 34px 70px;max-width:1060px}
+.section{display:none;animation:fade .25s ease}
+.section.show{display:block}
+@keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+h2.title{font-size:26px;margin:0 0 4px}
+.sub{color:var(--muted);margin:0 0 20px;font-size:14px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:20px;margin-bottom:16px;box-shadow:var(--shadow)}
+.grid{display:grid;gap:14px}
+.g2{grid-template-columns:repeat(2,1fr)}
+.g3{grid-template-columns:repeat(3,1fr)}
+@media(max-width:820px){.g2,.g3{grid-template-columns:1fr}}
+.badge{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.06em;padding:3px 9px;border-radius:20px;text-transform:uppercase}
+.b-sci{background:rgba(90,139,255,.18);color:#9cb8ff}
+.b-gov{background:rgba(224,179,65,.18);color:var(--gold)}
+.b-rev{background:rgba(224,102,79,.18);color:#f0a08e}
+.b-soc{background:rgba(63,191,127,.18);color:#86e3b3}
+/* hero */
+.hero{display:flex;gap:22px;align-items:center;flex-wrap:wrap;
+  background:linear-gradient(120deg,#21314f,#192237);border:1px solid var(--line);
+  border-radius:16px;padding:24px;box-shadow:var(--shadow);margin-bottom:18px}
+.hero .big{font-size:54px}
+.hero h3{margin:0 0 4px;font-size:22px}
+.hero p{margin:0;color:var(--muted);max-width:560px;font-size:14px}
+.stat{display:flex;gap:12px;flex-wrap:wrap;margin-top:14px}
+.stat div{background:var(--bg2);border:1px solid var(--line);border-radius:10px;padding:9px 14px;font-size:13px}
+.stat b{color:var(--gold)}
+/* lesson */
+.lblock h4{margin:18px 0 6px;font-size:16px;color:var(--gold)}
+.lblock p{margin:0 0 9px;line-height:1.62;font-size:14.5px}
+.terms{display:flex;gap:7px;flex-wrap:wrap;margin:6px 0 4px}
+.term{background:var(--bg2);border:1px solid var(--line);border-radius:20px;padding:4px 11px;font-size:12.5px;color:#cfe}
+.check{background:var(--bg2);border-left:3px solid var(--gold);border-radius:0 10px 10px 0;padding:12px 16px;margin-top:14px}
+.check ol{margin:6px 0 0;padding-left:20px}.check li{margin:5px 0;font-size:14px}
+.why-now{background:rgba(90,139,255,.08);border:1px solid var(--line);border-radius:10px;padding:11px 14px;font-size:13.5px;color:#cdd}
+/* schedule */
+.wk{display:flex;gap:14px;border:1px solid var(--line);border-radius:12px;padding:14px 16px;margin-bottom:10px;background:var(--panel);align-items:flex-start}
+.wk.now{border-color:var(--gold);box-shadow:0 0 0 1px var(--gold)}
+.wk.exam{background:linear-gradient(90deg,rgba(224,102,79,.12),var(--panel))}
+.wk.vac{opacity:.7;border-style:dashed}
+.wknum{width:46px;flex-shrink:0;text-align:center}
+.wknum .n{font-size:22px;font-weight:800;color:var(--gold)}
+.wknum .l{font-size:10px;color:var(--muted);text-transform:uppercase}
+.wkbody{flex:1;min-width:0}
+.wkbody .date{font-size:12px;color:var(--muted)}
+.wkbody .unit{font-weight:700;margin:2px 0 4px}
+.wkbody ul{margin:4px 0 0;padding-left:18px}.wkbody li{font-size:13.5px;margin:2px 0}
+.tag-now{background:var(--gold);color:#241c00;font-size:10px;font-weight:800;border-radius:6px;padding:2px 7px;margin-left:6px}
+.tag-exam{background:var(--red);color:#fff;font-size:10px;font-weight:800;border-radius:6px;padding:2px 7px;margin-left:6px}
+.gobtn{background:var(--panel2);border:1px solid var(--line);color:var(--ink);border-radius:8px;padding:5px 11px;font-size:12px;cursor:pointer;margin-top:6px}
+.gobtn:hover{border-color:var(--gold)}
+/* people */
+.person{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:15px}
+.person .pname{font-weight:700;font-size:15px}
+.person .yr{color:var(--muted);font-size:12px}
+.person .fact{font-size:13px;margin-top:7px;line-height:1.5;color:#dde}
+/* timeline */
+.tl{position:relative;margin-left:10px;padding-left:24px;border-left:2px solid var(--line)}
+.tl .ev{position:relative;margin-bottom:16px}
+.tl .ev:before{content:"";position:absolute;left:-31px;top:3px;width:12px;height:12px;border-radius:50%;background:var(--gold);box-shadow:0 0 0 4px var(--bg)}
+.tl .yy{font-weight:800;color:var(--gold);font-size:15px}
+.tl .tt{font-size:14px;color:#dde}
+/* glossary */
+.gloss dt{font-weight:700;color:var(--gold);margin-top:12px;font-size:14.5px}
+.gloss dd{margin:3px 0 0;font-size:14px;color:#dde;line-height:1.5}
+.searchbar{width:100%;padding:11px 14px;border-radius:10px;border:1px solid var(--line);background:var(--bg2);color:var(--ink);font-size:14px;margin-bottom:14px}
+/* quiz */
+.examcard{cursor:pointer;transition:.15s}
+.examcard:hover{border-color:var(--gold);transform:translateY(-2px)}
+.qwrap{max-width:720px}
+.qprog{height:8px;background:var(--bg2);border-radius:20px;overflow:hidden;margin-bottom:18px}
+.qprog i{display:block;height:100%;background:linear-gradient(90deg,var(--gold),var(--gold2));transition:.3s}
+.qnum{color:var(--muted);font-size:13px;margin-bottom:6px}
+.qtext{font-size:18px;font-weight:600;margin-bottom:16px;line-height:1.4}
+.opt{display:block;width:100%;text-align:left;background:var(--panel);border:1px solid var(--line);color:var(--ink);
+  padding:13px 16px;border-radius:11px;margin-bottom:10px;cursor:pointer;font-size:14.5px;transition:.12s}
+.opt:hover{border-color:var(--blue);background:var(--panel2)}
+.opt.correct{border-color:var(--green);background:rgba(63,191,127,.16)}
+.opt.wrong{border-color:var(--red);background:rgba(224,102,79,.16)}
+.opt.dim{opacity:.55}
+.expl{background:var(--bg2);border-left:3px solid var(--blue);border-radius:0 10px 10px 0;padding:11px 15px;margin:6px 0 14px;font-size:14px;display:none}
+.expl.show{display:block}
+.btn{background:linear-gradient(135deg,var(--gold),var(--gold2));color:#241c00;border:0;border-radius:10px;
+  padding:11px 22px;font-size:14px;font-weight:700;cursor:pointer;box-shadow:var(--shadow)}
+.btn:disabled{opacity:.4;cursor:not-allowed}
+.btn.ghost{background:var(--panel2);color:var(--ink);border:1px solid var(--line);box-shadow:none}
+.scorebox{text-align:center;padding:30px}
+.scorebox .pct{font-size:64px;font-weight:800;color:var(--gold);line-height:1}
+.scorebox .msg{font-size:17px;margin:10px 0 4px}
+.mini{color:var(--muted);font-size:12px}
+/* flashcards */
+.fc{perspective:1000px;height:170px;cursor:pointer}
+.fcin{position:relative;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d}
+.fc.flip .fcin{transform:rotateY(180deg)}
+.fcface{position:absolute;inset:0;backface-visibility:hidden;border-radius:13px;border:1px solid var(--line);
+  display:grid;place-items:center;padding:16px;text-align:center}
+.fcfront{background:linear-gradient(135deg,#22304e,#1a2236);font-weight:700;font-size:16px}
+.fcback{background:var(--panel);transform:rotateY(180deg);font-size:13.5px;color:#dde;line-height:1.5}
+.tabrow{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
+.tab{background:var(--panel);border:1px solid var(--line);color:var(--ink);padding:8px 15px;border-radius:9px;cursor:pointer;font-size:13px}
+.tab.active{background:var(--gold);color:#241c00;font-weight:700;border-color:var(--gold)}
+.hint{color:var(--muted);font-size:12.5px;text-align:center;margin-top:8px}
+</style>
+</head>
+<body>
+<nav id="side">
+  <div class="brand">
+    <div class="crest">N</div>
+    <div><h1>World History · 9th</h1><small>NORDIC — 2nd Term 2026</small></div>
+  </div>
+  <div class="navlbl">Chapter 22</div>
+  <div class="nav" id="nav"></div>
+  <div class="studentbox">
+    <small>Student</small><b id="stuName"></b>
+    <small id="stuProg">Progress saved on this device</small>
+  </div>
+</nav>
+
+<main id="main">
+  <!-- HOME -->
+  <section class="section show" data-sec="home">
+    <div class="hero">
+      <div class="big">🔭</div>
+      <div>
+        <h3>Enlightenment &amp; Revolution, 1550–1789</h3>
+        <p>Chapter 22 — how questioning the universe and old authority sparked the Scientific Revolution, the Enlightenment, and the American Revolution.</p>
+        <div class="stat" id="homeStats"></div>
+      </div>
+    </div>
+    <div class="grid g3" id="homeCards"></div>
+    <div class="card">
+      <h4 style="margin-top:0;color:var(--gold)">How to use this app with José Manuel</h4>
+      <p style="font-size:14px;line-height:1.6;color:#dde">
+        Follow the <b>Schedule</b> tab week by week — it shows what to study and highlights the current week and the two graded
+        Process Evaluations. Read each <b>Lesson</b>, review the <b>People</b>, <b>Timeline</b> and <b>Glossary</b>, then test
+        understanding with the <b>Quizzes</b>. Use the two <b>Process Evaluation</b> practice exams before Week 5 and Week 10.</p>
+    </div>
+  </section>
+
+  <!-- SCHEDULE -->
+  <section class="section" data-sec="schedule">
+    <h2 class="title">📅 Schedule / Cronograma</h2>
+    <p class="sub" id="schedSub"></p>
+    <div class="card" style="padding:14px 18px">
+      <b style="color:var(--gold)">Assessment in this term</b>
+      <ul id="assessList" style="margin:8px 0 0;font-size:13.5px;line-height:1.5"></ul>
+    </div>
+    <div id="schedList"></div>
+  </section>
+
+  <!-- LESSONS get injected -->
+  <div id="lessonSections"></div>
+
+  <!-- PEOPLE -->
+  <section class="section" data-sec="people">
+    <h2 class="title">👤 Key People</h2>
+    <p class="sub">The thinkers and leaders of the Scientific Revolution, Enlightenment and American Revolution.</p>
+    <div class="grid g3" id="peopleGrid"></div>
+  </section>
+
+  <!-- TIMELINE -->
+  <section class="section" data-sec="timeline">
+    <h2 class="title">🕰️ Timeline</h2>
+    <p class="sub">Key dates from 1543 to 1792.</p>
+    <div class="card"><div class="tl" id="tl"></div></div>
+  </section>
+
+  <!-- GLOSSARY -->
+  <section class="section" data-sec="glossary">
+    <h2 class="title">📖 Terms &amp; Names</h2>
+    <p class="sub">Search the key vocabulary, or flip the flashcards to study.</p>
+    <div class="tabrow">
+      <button class="tab active" data-gtab="list">List</button>
+      <button class="tab" data-gtab="cards">Flashcards</button>
+    </div>
+    <div id="gList"><input class="searchbar" id="gSearch" placeholder="Search a term…"><dl class="gloss" id="glossDl"></dl></div>
+    <div id="gCards" style="display:none"><div class="grid g3" id="fcGrid"></div><p class="hint">Click a card to flip it.</p></div>
+  </section>
+
+  <!-- EXAMS -->
+  <section class="section" data-sec="exams">
+    <h2 class="title">📝 Quizzes &amp; Exams</h2>
+    <p class="sub">Practice by section, or take the two graded Process Evaluations.</p>
+    <h4 style="color:var(--gold)">Graded Process Evaluations (practice)</h4>
+    <div class="grid g2" id="examCards"></div>
+    <h4 style="color:var(--gold);margin-top:22px">Section quizzes</h4>
+    <div class="grid g2" id="quizCards"></div>
+  </section>
+
+  <!-- QUIZ RUNNER -->
+  <section class="section" data-sec="runner">
+    <button class="btn ghost" id="quitQuiz" style="margin-bottom:16px">← Back</button>
+    <div class="qwrap" id="runnerBody"></div>
+  </section>
+</main>
+
+<script src="data.js"></script>
+<script>
+/* ---------------- helpers ---------------- */
+const $=s=>document.querySelector(s), ce=(t,c)=>{const e=document.createElement(t);if(c)e.className=c;return e;};
+const TODAY=new Date("2026-06-17");
+const BADGE={ "Science":"b-sci","Government":"b-gov","Revolution":"b-rev","Society":"b-soc","Monarchy":"b-gov" };
+const store={get:k=>{try{return JSON.parse(localStorage.getItem("ch22_"+k))}catch(e){return null}},set:(k,v)=>localStorage.setItem("ch22_"+k,JSON.stringify(v))};
+
+/* ---------------- navigation ---------------- */
+const NAVITEMS=[
+  {sec:"home",ico:"🏠",label:"Home"},
+  {sec:"schedule",ico:"📅",label:"Schedule"},
+  {sec:"s1",ico:"🔬",label:"1 · Scientific Revolution"},
+  {sec:"s2",ico:"💡",label:"2 · Enlightenment"},
+  {sec:"s3",ico:"🎨",label:"3 · It Spreads"},
+  {sec:"s4",ico:"🦅",label:"4 · American Revolution"},
+  {sec:"s5",ico:"🇫🇷",label:"5 · Looking Ahead"},
+  {sec:"people",ico:"👤",label:"Key People"},
+  {sec:"timeline",ico:"🕰️",label:"Timeline"},
+  {sec:"glossary",ico:"📖",label:"Terms & Names"},
+  {sec:"exams",ico:"📝",label:"Quizzes & Exams",pill:"2 exams"}
+];
+function buildNav(){
+  const nav=$("#nav");
+  NAVITEMS.forEach(it=>{
+    const b=ce("button"); b.dataset.go=it.sec;
+    b.innerHTML=`<span class="ico">${it.ico}</span><span>${it.label}</span>`+(it.pill?`<span class="pill">${it.pill}</span>`:"");
+    b.onclick=()=>go(it.sec); nav.appendChild(b);
+  });
+}
+function go(sec){
+  document.querySelectorAll(".section").forEach(s=>s.classList.toggle("show",s.dataset.sec===sec));
+  document.querySelectorAll("#nav button").forEach(b=>b.classList.toggle("active",b.dataset.go===sec));
+  window.scrollTo(0,0);
+}
+
+/* ---------------- home ---------------- */
+function buildHome(){
+  $("#stuName").textContent=STUDENT;
+  $("#homeStats").innerHTML=
+    `<div><b>5</b> lessons</div><div><b>${PEOPLE.length}</b> key people</div>
+     <div><b>${GLOSSARY.length}</b> terms</div><div><b>2</b> process evaluations</div>`;
+  const cards=[
+    {ico:"🔬",t:"1 · The Scientific Revolution",d:"Copernicus, Galileo, Newton and the scientific method.",go:"s1",b:"b-sci"},
+    {ico:"💡",t:"2 · The Enlightenment",d:"Locke, Voltaire, Montesquieu, Rousseau — reason and rights.",go:"s2",b:"b-gov"},
+    {ico:"🎨",t:"3 · The Enlightenment Spreads",d:"Salons, the arts, and the enlightened despots.",go:"s3",b:"b-gov"},
+    {ico:"🦅",t:"4 · The American Revolution",d:"From the Stamp Act to the Constitution.",go:"s4",b:"b-rev"},
+    {ico:"🇫🇷",t:"5 · Looking Ahead",d:"The bridge to the French Revolution (Week 13).",go:"s5",b:"b-rev"},
+    {ico:"📝",t:"Quizzes & Exams",d:"Section quizzes + 2 Process Evaluation practices.",go:"exams",b:"b-soc"}
+  ];
+  $("#homeCards").innerHTML=cards.map(c=>
+    `<div class="card examcard" onclick="go('${c.go}')">
+       <div style="font-size:30px">${c.ico}</div>
+       <div style="font-weight:700;margin:6px 0 4px">${c.t}</div>
+       <div style="font-size:13px;color:var(--muted);line-height:1.5">${c.d}</div>
+     </div>`).join("");
+}
+
+/* ---------------- schedule ---------------- */
+function buildSchedule(){
+  $("#schedSub").textContent=`${COURSE.subject} · ${COURSE.grade} · ${COURSE.dates} · Teachers: ${COURSE.teachers}`;
+  $("#assessList").innerHTML=ASSESSMENT_INFO.graded.map(g=>`<li>${g}</li>`).join("");
+  const list=$("#schedList");
+  SCHEDULE.forEach(w=>{
+    const now = w.start && TODAY>=new Date(w.start) && TODAY<=new Date(w.end);
+    const div=ce("div","wk"+(now?" now":"")+(w.exam?" exam":"")+(w.vacation?" vac":""));
+    let bullets=w.contents.map(c=>`<li>${c}</li>`).join("");
+    div.innerHTML=
+      `<div class="wknum"><div class="n">${w.week??"—"}</div><div class="l">${w.vacation?"break":"week"}</div></div>
+       <div class="wkbody">
+         <div class="date">${w.range}</div>
+         <div class="unit">${w.unit}
+           ${now?'<span class="tag-now">THIS WEEK</span>':""}
+           ${w.exam?'<span class="tag-exam">'+w.exam+'</span>':""}</div>
+         ${w.note?`<div style="font-size:12.5px;color:var(--muted);font-style:italic;margin-bottom:4px">${w.note}</div>`:""}
+         <ul>${bullets}</ul>
+         ${w.lesson?`<button class="gobtn" onclick="go('${w.lesson}')">Open lesson →</button>`:""}
+       </div>`;
+    list.appendChild(div);
+  });
+}
+
+/* ---------------- lessons ---------------- */
+function buildLessons(){
+  const host=$("#lessonSections");
+  LESSONS.forEach(L=>{
+    const sec=ce("section","section"); sec.dataset.sec=L.id;
+    let blocks=L.blocks.map(b=>
+      `<div class="lblock"><h4>${b.h}</h4>${b.p.map(p=>`<p>${p}</p>`).join("")}</div>`).join("");
+    sec.innerHTML=
+      `<h2 class="title">${L.title}</h2>
+       <p class="sub">Section ${L.num} · <span class="badge b-gov">${L.big}</span></p>
+       <div class="card">
+         <p style="font-size:15px;margin:0 0 10px"><b>Main idea:</b> ${L.subtitle}</p>
+         <div class="why-now"><b>Why it matters now:</b> ${L.why}</div>
+         <div class="terms" style="margin-top:12px">${L.terms.map(t=>`<span class="term">${t}</span>`).join("")}</div>
+       </div>
+       <div class="card">${blocks}
+         <div class="check"><b>✔ Check your understanding</b><ol>${L.check.map(c=>`<li>${c}</li>`).join("")}</ol></div>
+       </div>
+       ${QUIZZES[L.id]?`<button class="btn" onclick="startQuiz('quiz','${L.id}')">Take Section ${L.num} quiz →</button>`:""}`;
+    host.appendChild(sec);
+  });
+}
+
+/* ---------------- people ---------------- */
+function buildPeople(){
+  $("#peopleGrid").innerHTML=PEOPLE.map(p=>
+    `<div class="person">
+       <span class="badge ${BADGE[p.tag]||'b-soc'}">${p.tag}</span>
+       <div class="pname" style="margin-top:8px">${p.name}</div>
+       <div class="yr">${p.years} · ${p.role}</div>
+       <div class="fact">${p.fact}</div>
+     </div>`).join("");
+}
+
+/* ---------------- timeline ---------------- */
+function buildTimeline(){
+  $("#tl").innerHTML=TIMELINE.map(e=>
+    `<div class="ev"><div class="yy">${e.y}</div><div class="tt">${e.t}</div></div>`).join("");
+}
+
+/* ---------------- glossary ---------------- */
+function buildGlossary(){
+  const dl=$("#glossDl");
+  const render=f=>{
+    dl.innerHTML=GLOSSARY.filter(([t,d])=>!f||t.toLowerCase().includes(f)||d.toLowerCase().includes(f))
+      .map(([t,d])=>`<dt>${t}</dt><dd>${d}</dd>`).join("")||"<dd style='color:var(--muted)'>No matches.</dd>";
+  };
+  render("");
+  $("#gSearch").oninput=e=>render(e.target.value.toLowerCase().trim());
+  $("#fcGrid").innerHTML=GLOSSARY.map(([t,d])=>
+    `<div class="fc" onclick="this.classList.toggle('flip')">
+       <div class="fcin"><div class="fcface fcfront">${t}</div><div class="fcface fcback">${d}</div></div>
+     </div>`).join("");
+  document.querySelectorAll("[data-gtab]").forEach(b=>b.onclick=()=>{
+    document.querySelectorAll("[data-gtab]").forEach(x=>x.classList.toggle("active",x===b));
+    $("#gList").style.display=b.dataset.gtab==="list"?"block":"none";
+    $("#gCards").style.display=b.dataset.gtab==="cards"?"block":"none";
+  });
+}
+
+/* ---------------- exams hub ---------------- */
+function buildExamsHub(){
+  $("#examCards").innerHTML=Object.entries(EXAMS).map(([k,e])=>
+    `<div class="card examcard" onclick="startQuiz('exam','${k}')">
+       <span class="badge b-rev">Graded practice</span>
+       <div style="font-weight:700;font-size:16px;margin:8px 0 3px">${e.title}</div>
+       <div class="mini">${e.week}</div>
+       <div style="font-size:13px;color:#dde;margin-top:8px">${e.scope}</div>
+       <div class="mini" style="margin-top:10px">${e.q.length} questions →</div>
+     </div>`).join("");
+  $("#quizCards").innerHTML=LESSONS.filter(L=>QUIZZES[L.id]).map(L=>{
+    const best=store.get("best_"+L.id);
+    return `<div class="card examcard" onclick="startQuiz('quiz','${L.id}')">
+       <div style="font-weight:700">${QUIZZES[L.id].title}</div>
+       <div class="mini" style="margin-top:6px">${QUIZZES[L.id].q.length} questions${best!=null?` · best ${best}%`:""} →</div>
+     </div>`;
+  }).join("");
+}
+
+/* ---------------- quiz runner ---------------- */
+let RUN=null;
+function startQuiz(kind,id){
+  const data = kind==="exam"?EXAMS[id]:QUIZZES[id];
+  RUN={kind,id,qs:data.q,title:data.title,i:0,score:0,answered:false};
+  go("runner"); renderQ();
+}
+function renderQ(){
+  const b=$("#runnerBody");
+  if(RUN.i>=RUN.qs.length){ renderScore(); return; }
+  const q=RUN.qs[RUN.i], pct=Math.round(RUN.i/RUN.qs.length*100);
+  b.innerHTML=
+    `<div class="qprog"><i style="width:${pct}%"></i></div>
+     <div style="font-weight:700;color:var(--gold);margin-bottom:10px">${RUN.title}</div>
+     <div class="qnum">Question ${RUN.i+1} of ${RUN.qs.length} · Score ${RUN.score}</div>
+     <div class="qtext">${q.q}</div>
+     <div id="opts"></div>
+     <div class="expl" id="expl"><b>Why:</b> ${q.why}</div>
+     <button class="btn" id="nextBtn" disabled>${RUN.i===RUN.qs.length-1?"See results":"Next question"} →</button>`;
+  const opts=$("#opts");
+  q.a.forEach((opt,idx)=>{
+    const el=ce("button","opt"); el.textContent=opt;
+    el.onclick=()=>answer(idx,q,el); opts.appendChild(el);
+  });
+  RUN.answered=false;
+  $("#nextBtn").onclick=()=>{ if(!RUN.answered)return; RUN.i++; renderQ(); };
+}
+function answer(idx,q,el){
+  if(RUN.answered)return; RUN.answered=true;
+  const opts=[...document.querySelectorAll(".opt")];
+  opts.forEach((o,i)=>{ o.classList.add(i===q.c?"correct":(i===idx?"wrong":"dim")); o.style.pointerEvents="none"; });
+  if(idx===q.c)RUN.score++;
+  $("#expl").classList.add("show");
+  $("#nextBtn").disabled=false;
+}
+function renderScore(){
+  const pct=Math.round(RUN.score/RUN.qs.length*100);
+  let msg = pct>=90?"Outstanding! 🏆":pct>=70?"Good work — keep reviewing. 👍":pct>=50?"On the way — study the weak spots. 📚":"Review the lessons and try again. 💪";
+  if(RUN.kind==="quiz"){ const prev=store.get("best_"+RUN.id)||0; if(pct>prev)store.set("best_"+RUN.id,pct); }
+  $("#runnerBody").innerHTML=
+    `<div class="scorebox card">
+       <div class="pct">${pct}%</div>
+       <div class="msg">${msg}</div>
+       <div class="mini">You got ${RUN.score} of ${RUN.qs.length} correct.</div>
+       <div style="margin-top:20px;display:flex;gap:10px;justify-content:center">
+         <button class="btn" onclick="startQuiz('${RUN.kind}','${RUN.id}')">Try again</button>
+         <button class="btn ghost" onclick="go('exams')">Back to exams</button>
+       </div>
+     </div>`;
+}
+$("#quitQuiz").onclick=()=>go("exams");
+
+/* ---------------- init ---------------- */
+buildNav(); buildHome(); buildSchedule(); buildLessons();
+buildPeople(); buildTimeline(); buildGlossary(); buildExamsHub();
+go("home");
+</script>
+</body>
+</html>
