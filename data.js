@@ -401,3 +401,77 @@ const EXAMS = {
         scope:"Sections 1–4: full Chapter 22 (Review)",
         q:buildExam(["s1","s2","s3","s4"]) }
 };
+
+/* ---------- EXTRA RESOURCES (web) ----------
+   Curated supplementary material for HMH / Holt McDougal
+   "World History: Patterns of Interaction" — Ch.22.  */
+const RESOURCES = [
+  { group:"Chapter notes & guides", icon:"📘",
+    blurb:"Ready-to-use notes and guided reading for all 4 sections of Chapter 22.",
+    items:[
+      { t:"Chapter 22 Student/Teacher Notes (all 4 sections)", for:"All sections",
+        url:"https://www.scribd.com/document/697922441/Chapter-22-Student-Teacher-Notes-Holt-McDougal-World-History-Patterns-of-Interaction",
+        d:"Organized, explained notes for the whole chapter — Scribd." },
+      { t:"Guided Reading Workbook (official PDF)", for:"All sections",
+        url:"https://mreriksen.weebly.com/uploads/3/0/4/5/30455120/guided_reading_workbook.pdf",
+        d:"Holt McDougal guided-reading sheets with vocabulary in context." },
+      { t:"Chapter 22 detailed notes — Studocu", for:"Sections 2–3",
+        url:"https://www.studocu.com/en-us/document/stuyvesant-high-school/world-history/copy-of-global-history-textbook-notes/63691113",
+        d:"Salons, the Encyclopedia, Enlightenment thinkers, baroque & neoclassical." },
+      { t:"Chapter 22 PowerPoint overview", for:"All sections",
+        url:"https://www.slideshare.net/slideshow/chapter-22-71916591/71916591",
+        d:"Slide deck: Scientific Revolution → Enlightenment → American Revolution." },
+      { t:"Teacher materials (note sheets + answer keys)", for:"All sections",
+        url:"https://www.teacherspayteachers.com/browse?search=world+history+patterns+of+interaction",
+        d:"Fill-in note sheets and PPTs that follow the textbook order — TPT." }
+    ]},
+  { group:"Videos", icon:"🎬",
+    blurb:"Short, engaging videos to introduce or review each section.",
+    items:[
+      { t:"The Scientific Revolution — Crash Course", for:"Section 1",
+        url:"https://www.youtube.com/watch?v=LNBkHhUZdro",
+        d:"Copernicus, Galileo, Newton and the new way of thinking." },
+      { t:"The Enlightenment — Crash Course European History #18", for:"Section 2",
+        url:"https://www.youtube.com/results?search_query=crash+course+european+history+18+the+enlightenment",
+        d:"Locke, Voltaire, Montesquieu, Rousseau — reason and rights." },
+      { t:"Tea, Taxes & the American Revolution — Crash Course #28", for:"Section 4",
+        url:"https://www.youtube.com/results?search_query=crash+course+world+history+28+american+revolution",
+        d:"From the Stamp Act to independence (guide on OER Project)." }
+    ]},
+  { group:"Primary sources", icon:"🔍",
+    blurb:"Use for the Source Analysis exercise (Week 11) and DBQ practice.",
+    items:[
+      { t:"Stanford SHEG — Reading Like a Historian", for:"Week 11 · Source Analysis",
+        url:"https://www.inquirygroup.org/history-lessons",
+        d:"100+ free lessons with documents, organizers and political cartoons." },
+      { t:"SHEG resource guide (BOCES)", for:"Week 11 · Source Analysis",
+        url:"https://moboces.libguides.com/qc_resources/sheg",
+        d:"How to find and use the Reading Like a Historian lessons." }
+    ]},
+  { group:"Review & self-test", icon:"📝",
+    blurb:"Flashcards and Q&A to prep for Process Evaluations #3 and #4.",
+    items:[
+      { t:"Quizlet — Chapter 22 flashcards", for:"PE #3 & #4",
+        url:"https://quizlet.com/37102533/mcdougal-littell-world-history-patterns-of-interaction-chapter-22-enlightenment-and-revolution-flash-cards/",
+        d:"Key terms and names for the whole chapter." },
+      { t:"Easy Notecards — Chapter 22", for:"PE #3 & #4",
+        url:"https://www.easynotecards.com/notecard_set/5973",
+        d:"Study notecards and quiz modes." },
+      { t:"Textbook solutions & answers (1st ed.)", for:"All sections",
+        url:"https://quizlet.com/explanations/textbook-solutions/world-history-patterns-of-interaction-1st-edition-9780547491127",
+        d:"Worked answers to the textbook's section/chapter assessments." }
+    ]},
+  { group:"Reference sites", icon:"🌐",
+    blurb:"From the course syllabus — free, reliable history sites.",
+    items:[
+      { t:"World History Encyclopedia", for:"All sections",
+        url:"https://www.worldhistory.org/", d:"Articles, maps and definitions." },
+      { t:"BBC Bitesize — History", for:"All sections",
+        url:"https://www.bbc.co.uk/bitesize/subjects/zk26n39", d:"Concise revision pages." },
+      { t:"PBS LearningMedia — World History", for:"All sections",
+        url:"https://www.pbslearningmedia.org/subjects/social-studies/world-history/",
+        d:"Classroom videos and activities." },
+      { t:"Running Reality — interactive maps & timelines", for:"All sections",
+        url:"https://www.runningreality.org/", d:"See the world change year by year." }
+    ]}
+];
