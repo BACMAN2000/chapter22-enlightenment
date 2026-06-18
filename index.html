@@ -155,6 +155,19 @@ h2.title{font-size:26px;margin:0 0 4px}
 .tab{background:var(--panel);border:1px solid var(--line);color:var(--ink);padding:8px 15px;border-radius:9px;cursor:pointer;font-size:13px}
 .tab.active{background:var(--gold);color:#241c00;font-weight:700;border-color:var(--gold)}
 .hint{color:var(--muted);font-size:12.5px;text-align:center;margin-top:8px}
+/* resources */
+.resgroup{margin-bottom:22px}
+.resgroup h3{display:flex;align-items:center;gap:9px;font-size:18px;margin:0 0 3px}
+.resgroup .gblurb{color:var(--muted);font-size:13px;margin:0 0 12px}
+.reslink{display:flex;gap:12px;align-items:flex-start;background:var(--panel);border:1px solid var(--line);
+  border-radius:12px;padding:13px 15px;text-decoration:none;color:var(--ink);transition:.13s}
+.reslink:hover{border-color:var(--gold);transform:translateY(-2px);background:var(--panel2)}
+.reslink .ri{font-size:20px;line-height:1;margin-top:1px}
+.reslink .rt{font-weight:600;font-size:14.5px}
+.reslink .rd{color:var(--muted);font-size:12.5px;margin-top:3px;line-height:1.45}
+.reslink .rfor{display:inline-block;margin-top:7px;font-size:10.5px;font-weight:700;letter-spacing:.04em;
+  text-transform:uppercase;background:rgba(91,148,255,.16);color:var(--gold);border-radius:20px;padding:2px 9px}
+.reslink .arr{margin-left:auto;color:var(--muted);font-size:15px;flex-shrink:0}
 </style>
 </head>
 <body>
@@ -243,6 +256,16 @@ h2.title{font-size:26px;margin:0 0 4px}
     <div class="grid g2" id="quizCards"></div>
   </section>
 
+  <!-- RESOURCES -->
+  <section class="section" data-sec="resources">
+    <h2 class="title">🌐 Extra Resources / Recursos</h2>
+    <p class="sub">Curated web material for HMH · <i>World History: Patterns of Interaction</i> — Chapter 22. Links open in a new tab.</p>
+    <div id="resWrap"></div>
+    <div class="card" style="font-size:13px;color:var(--muted)">
+      💡 Your 2018 textbook is the HMH edition of <i>World History: Patterns of Interaction</i> (formerly Holt McDougal / McDougal Littell), so many resources appear under those older names — it is the same Chapter 22.
+    </div>
+  </section>
+
   <!-- QUIZ RUNNER -->
   <section class="section" data-sec="runner">
     <button class="btn ghost" id="quitQuiz" style="margin-bottom:16px">← Back</button>
@@ -270,7 +293,8 @@ const NAVITEMS=[
   {sec:"people",ico:"👤",label:"Key People"},
   {sec:"timeline",ico:"🕰️",label:"Timeline"},
   {sec:"glossary",ico:"📖",label:"Terms & Names"},
-  {sec:"exams",ico:"📝",label:"Quizzes & Exams",pill:"2 exams"}
+  {sec:"exams",ico:"📝",label:"Quizzes & Exams",pill:"2 exams"},
+  {sec:"resources",ico:"🌐",label:"Resources"}
 ];
 function buildNav(){
   const nav=$("#nav");
@@ -298,7 +322,8 @@ function buildHome(){
     {ico:"🎨",t:"3 · The Enlightenment Spreads",d:"Salons, the arts, and the enlightened despots.",go:"s3",b:"b-gov"},
     {ico:"🦅",t:"4 · The American Revolution",d:"From the Stamp Act to the Constitution.",go:"s4",b:"b-rev"},
     {ico:"🇫🇷",t:"5 · Looking Ahead",d:"The bridge to the French Revolution (Week 13).",go:"s5",b:"b-rev"},
-    {ico:"📝",t:"Quizzes & Exams",d:"Section quizzes + 2 Process Evaluation practices.",go:"exams",b:"b-soc"}
+    {ico:"📝",t:"Quizzes & Exams",d:"Section quizzes + 2 Process Evaluation practices.",go:"exams",b:"b-soc"},
+    {ico:"🌐",t:"Extra Resources",d:"Notes, videos, primary sources & review sites from the web.",go:"resources",b:"b-sci"}
   ];
   $("#homeCards").innerHTML=cards.map(c=>
     `<div class="card examcard" onclick="go('${c.go}')">
@@ -411,6 +436,27 @@ function buildExamsHub(){
   }).join("");
 }
 
+/* ---------------- resources ---------------- */
+function buildResources(){
+  $("#resWrap").innerHTML=RESOURCES.map(g=>
+    `<div class="resgroup">
+       <h3>${g.icon} ${g.group}</h3>
+       <p class="gblurb">${g.blurb}</p>
+       <div class="grid g2">
+         ${g.items.map(it=>
+           `<a class="reslink" href="${it.url}" target="_blank" rel="noopener">
+              <span class="ri">🔗</span>
+              <span>
+                <span class="rt">${it.t}</span>
+                <span class="rd" style="display:block">${it.d}</span>
+                ${it.for?`<span class="rfor">${it.for}</span>`:""}
+              </span>
+              <span class="arr">↗</span>
+            </a>`).join("")}
+       </div>
+     </div>`).join("");
+}
+
 /* ---------------- quiz runner ---------------- */
 let RUN=null;
 function startQuiz(kind,id){
@@ -465,7 +511,7 @@ $("#quitQuiz").onclick=()=>go("exams");
 
 /* ---------------- init ---------------- */
 buildNav(); buildHome(); buildSchedule(); buildLessons();
-buildPeople(); buildTimeline(); buildGlossary(); buildExamsHub();
+buildPeople(); buildTimeline(); buildGlossary(); buildExamsHub(); buildResources();
 go("home");
 </script>
 </body>
